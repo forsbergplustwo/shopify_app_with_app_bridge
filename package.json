@@ -1,0 +1,17 @@
+{
+  "name": "shopify_app_with_app_bridge",
+  "private": true,
+  "dependencies": {
+    "@rails/actioncable": "^6.0.0",
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "^4.2.0",
+    "@shopify/app-bridge": "^1.11.1",
+    "stimulus": "^1.1.1",
+    "turbolinks": "^5.2.0"
+  },
+  "version": "0.1.0",
+  "devDependencies": {
+    "webpack-dev-server": "^3.9.0"
+  }
+}
