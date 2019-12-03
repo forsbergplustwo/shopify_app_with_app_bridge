@@ -11,9 +11,10 @@ import { Controller } from 'stimulus'
 import createApp from '@shopify/app-bridge'
 import { Toast, History, Redirect, Loading, TitleBar } from '@shopify/app-bridge/actions'
 
+const FLASH_DURATION = 5000
+
 export default class extends Controller {
   initialize () {
-    this.flashDuration = 5000
     // Create the Application Bridge, History, Redirect and Loading
     this.appBridge = this.createAppBridge()
     this.appHistory = this.createAppHistory(this.appBridge)
@@ -23,31 +24,43 @@ export default class extends Controller {
 
   connect () {
     this.updateHistory()
-    this.stopLoading()
+    this.bindStopLoadingEvent()
+    this.bindStartLoadingEvent()
     console.log('Connected!')
   }
 
   disconnect () {
-    this.startLoading()
   }
 
   updateHistory () {
     this.appHistory.dispatch(History.Action.PUSH, window.location.pathname)
   }
 
+  bindStartLoadingEvent () {
+    this.startLoading = this.startLoading.bind(this)
+    window.addEventListener('turbolinks:before-visit', this.startLoading, { once: true })
+  }
+
+  bindStopLoadingEvent () {
+    this.stopLoading = this.stopLoading.bind(this)
+    window.addEventListener('turbolinks:render', this.stopLoading, { once: true })
+  }
+
   startLoading () {
     this.appLoading.dispatch(Loading.Action.START)
+    console.log('Started loading')
   }
 
   stopLoading () {
     this.appLoading.dispatch(Loading.Action.STOP)
+    console.log('Stopped loading')
   }
 
   // Flash helpers
   flashNotice (message) {
     const options = {
       isError: false,
-      duration: this.flashDuration,
+      duration: FLASH_DURATION,
       message: message
     }
     const toastNotice = Toast.create(this.appBridge, options)
@@ -57,7 +70,7 @@ export default class extends Controller {
   flashError (message) {
     const options = {
       isError: true,
-      duration: this.flashDuration,
+      duration: FLASH_DURATION,
       message: message
     }
     const toastNotice = Toast.create(this.appBridge, options)

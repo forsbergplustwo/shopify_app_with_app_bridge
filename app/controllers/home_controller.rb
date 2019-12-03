@@ -5,5 +5,6 @@ class HomeController < AuthenticatedController
   end
 
   def show
+    sleep 5
   end
 end
