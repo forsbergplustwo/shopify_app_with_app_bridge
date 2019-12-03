@@ -1,19 +1,14 @@
 import ApplicationController from '../application_controller'
-import { TitleBar, Button, Redirect } from '@shopify/app-bridge/actions'
+import { Button } from '@shopify/app-bridge/actions'
 
 export default class extends ApplicationController {
   initialize () {
     super.initialize()
-  }
-
-  connect () {
-    super.connect()
-    // this.appBridge is initialized here
     const app = this.appBridge
 
-    const flashButton = Button.create(app, { label: 'Show flash' })
+    const flashButton = Button.create(app, { label: 'Flash (notice)' })
     const titleBarOptions = {
-      title: 'Home Index',
+      title: 'Home',
       buttons: {
         primary: flashButton
       }
@@ -21,7 +16,12 @@ export default class extends ApplicationController {
     flashButton.subscribe(Button.Action.CLICK, data => {
       this.flashNotice('Flash button clicked')
     })
-    const myTitleBar = TitleBar.create(app, titleBarOptions)
+    this.appTitleBar = this.createAppTitleBar(app, titleBarOptions)
+  }
+
+  connect () {
+    super.connect()
+    // this.appBridge is initialized here
   }
 
   disconnect () {

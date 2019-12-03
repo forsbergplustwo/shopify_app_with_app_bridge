@@ -9,34 +9,21 @@
 
 import { Controller } from 'stimulus'
 import createApp from '@shopify/app-bridge'
-import { Toast, History, Loading } from '@shopify/app-bridge/actions'
+import { Toast, History, Redirect, Loading, TitleBar } from '@shopify/app-bridge/actions'
 
 export default class extends Controller {
   initialize () {
     this.flashDuration = 5000
-    // Create the App Bridge
-    const data = document.getElementById('shopify-app-init').dataset
-    const app = createApp({
-      apiKey: data.apiKey,
-      shopOrigin: data.shopOrigin,
-      forceRedirect: true
-    })
-    this.appBridge = app
-
-    // Create the App Bridge History Helper
-    const history = History.create(app)
-    this.appBridgeHistory = history
-
-    // Create the App Bridge Loading Indicator
-    const loading = Loading.create(app)
-    this.appBridgeLoader = loading
+    // Create the Application Bridge, History, Redirect and Loading
+    this.appBridge = this.createAppBridge()
+    this.appHistory = this.createAppHistory(this.appBridge)
+    this.appRedirect = this.createAppRedirect(this.appBridge)
+    this.appLoading = this.createAppLoading(this.appBridge)
   }
 
   connect () {
     this.updateHistory()
-    setTimeout(() => {
-      this.stopLoading()
-    }, 300)
+    this.stopLoading()
     console.log('Connected!')
   }
 
@@ -44,6 +31,19 @@ export default class extends Controller {
     this.startLoading()
   }
 
+  updateHistory () {
+    this.appHistory.dispatch(History.Action.PUSH, window.location.pathname)
+  }
+
+  startLoading () {
+    this.appLoading.dispatch(Loading.Action.START)
+  }
+
+  stopLoading () {
+    this.appLoading.dispatch(Loading.Action.STOP)
+  }
+
+  // Flash helpers
   flashNotice (message) {
     const options = {
       isError: false,
@@ -64,15 +64,53 @@ export default class extends Controller {
     toastNotice.dispatch(Toast.Action.SHOW)
   }
 
-  updateHistory () {
-    this.appBridgeHistory.dispatch(History.Action.PUSH, window.location.pathname)
+  // Application instance
+  createAppBridge () {
+    if (!this.application.appBridge) {
+      const data = document.getElementById('shopify-app-init').dataset
+      const app = createApp({
+        apiKey: data.apiKey,
+        shopOrigin: data.shopOrigin,
+        forceRedirect: true
+      })
+      this.application.appBridge = app
+    }
+    return this.application.appBridge
   }
 
-  startLoading () {
-    this.appBridgeLoader.dispatch(Loading.Action.START)
+  // Application instance
+  createAppHistory (app) {
+    if (!this.application.appHistory) {
+      const history = History.create(app)
+      this.application.appHistory = history
+    }
+    return this.application.appHistory
   }
 
-  stopLoading () {
-    this.appBridgeLoader.dispatch(Loading.Action.STOP)
+  // Application instance
+  createAppLoading (app) {
+    if (!this.application.appLoading) {
+      const loading = Loading.create(app)
+      this.application.appLoading = loading
+    }
+    return this.application.appLoading
+  }
+
+  // Application instance
+  createAppRedirect (app) {
+    if (!this.application.appRedirect) {
+      const redirect = Redirect.create(app)
+      this.application.appRedirect = redirect
+    }
+    return this.application.appRedirect
+  }
+
+  // Per-page instance (accepts options)
+  createAppTitleBar (app, options) {
+    if (!this.appTitleBar) {
+      const titleBar = TitleBar.create(app, options)
+      this.appTitleBar = titleBar
+    }
+    return this.appTitleBar
   }
 }

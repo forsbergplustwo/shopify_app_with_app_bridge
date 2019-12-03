@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+ .turbolinks-progress-bar {
+  visibility: hidden;
+}
