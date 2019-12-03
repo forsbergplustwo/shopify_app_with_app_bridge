@@ -38,12 +38,12 @@ export default class extends Controller {
 
   bindStartLoadingEvent () {
     this.startLoading = this.startLoading.bind(this)
-    window.addEventListener('turbolinks:before-visit', this.startLoading, { once: true })
+    window.addEventListener('beforeunload', this.startLoading, { once: true })
   }
 
   bindStopLoadingEvent () {
     this.stopLoading = this.stopLoading.bind(this)
-    window.addEventListener('turbolinks:render', this.stopLoading, { once: true })
+    window.addEventListener('DOMContentLoaded', this.stopLoading, { once: true })
   }
 
   startLoading () {
