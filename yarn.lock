@@ -6635,6 +6635,14 @@ stdout-stream@^1.4.0:
   dependencies:
     readable-stream "^2.0.1"
 
+stimulus-shopify-app-bridge@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/stimulus-shopify-app-bridge/-/stimulus-shopify-app-bridge-0.1.0.tgz#b4c7751cd918f0300916fc1b27659041e5340c13"
+  integrity sha512-0JuRGeYYf6hutaWRrBNKd/2NqllhJMJzbgclgr9tlFQmJQwLrWM5EWrAunw5qmSeSf8ZvVk2x+5gDQBlMHP/uw==
+  dependencies:
+    "@shopify/app-bridge" "^1.11.1"
+    stimulus "^1.1.1"
+
 stimulus@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/stimulus/-/stimulus-1.1.1.tgz#53c2fded6849e7b85eed3ed8dd76e33abd74bec5"

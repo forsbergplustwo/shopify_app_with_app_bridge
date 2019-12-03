@@ -1,7 +1,7 @@
-import ApplicationController from '../application_controller'
+import AppBridgeController from 'stimulus-shopify-app-bridge'
 import { Button, Modal } from '@shopify/app-bridge/actions'
 
-export default class extends ApplicationController {
+export default class extends AppBridgeController {
   initialize () {
     super.initialize()
     const app = this.appBridge
