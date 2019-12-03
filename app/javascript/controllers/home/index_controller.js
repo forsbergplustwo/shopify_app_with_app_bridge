@@ -11,16 +11,16 @@ export default class extends ApplicationController {
     // this.appBridge is initialized here
     const app = this.appBridge
 
-    const breadcrumb = Button.create(app, { label: 'My breadcrumb' })
-    breadcrumb.subscribe(Button.Action.CLICK, () => {
-      app.dispatch(Redirect.toApp({ path: '/breadcrumb-link' }))
-    })
-
+    const flashButton = Button.create(app, { label: 'Show flash' })
     const titleBarOptions = {
-      title: 'My page title',
-      breadcrumbs: breadcrumb
+      title: 'Home Index',
+      buttons: {
+        primary: flashButton
+      }
     }
-
+    flashButton.subscribe(Button.Action.CLICK, data => {
+      this.flashNotice('Flash button clicked')
+    })
     const myTitleBar = TitleBar.create(app, titleBarOptions)
   }
 

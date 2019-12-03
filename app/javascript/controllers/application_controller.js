@@ -12,6 +12,10 @@ import createApp from '@shopify/app-bridge'
 import { Toast } from '@shopify/app-bridge/actions'
 
 export default class extends Controller {
+  initialize () {
+    this.flashDuration = 5000
+  }
+
   connect () {
     const data = document.getElementById('shopify-app-init').dataset
     const createdApp = createApp({
@@ -22,14 +26,22 @@ export default class extends Controller {
     this.appBridge = createdApp
   }
 
-  flashNotice (options) {
-    options.isError = false
+  flashNotice (message) {
+    const options = {
+      isError: false,
+      duration: this.flashDuration,
+      message: message
+    }
     const toastNotice = Toast.create(this.appBridge, options)
     toastNotice.dispatch(Toast.Action.SHOW)
   }
 
-  flashError (options) {
-    options.isError = true
+  flashError (message) {
+    const options = {
+      isError: true,
+      duration: this.flashDuration,
+      message: message
+    }
     const toastNotice = Toast.create(this.appBridge, options)
     toastNotice.dispatch(Toast.Action.SHOW)
   }

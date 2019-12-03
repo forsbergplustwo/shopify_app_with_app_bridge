@@ -34,3 +34,5 @@ yarn-debug.log*
 .env
 .powder
 .powenv
+
+/**/.DS_Store

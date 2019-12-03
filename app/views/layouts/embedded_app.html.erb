@@ -25,8 +25,7 @@
 
   <%= content_tag(:div, nil, id: 'shopify-app-init', data: {
       api_key: ShopifyApp.configuration.api_key,
-      shop_origin: ("#{ @shop_session.url }" if @shop_session),
-      debug: Rails.env.development?
+      shop_origin: ("#{ @shop_session.url }" if @shop_session)
     } ) %>
 
   <% if content_for?(:javascript) %>
