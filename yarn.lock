@@ -6635,10 +6635,10 @@ stdout-stream@^1.4.0:
   dependencies:
     readable-stream "^2.0.1"
 
-stimulus-shopify-app-bridge@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/stimulus-shopify-app-bridge/-/stimulus-shopify-app-bridge-0.1.0.tgz#b4c7751cd918f0300916fc1b27659041e5340c13"
-  integrity sha512-0JuRGeYYf6hutaWRrBNKd/2NqllhJMJzbgclgr9tlFQmJQwLrWM5EWrAunw5qmSeSf8ZvVk2x+5gDQBlMHP/uw==
+stimulus-shopify-app-bridge@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/stimulus-shopify-app-bridge/-/stimulus-shopify-app-bridge-0.1.2.tgz#e6077db4587ef84adc340927ef5b7cb79cd607dd"
+  integrity sha512-gvy4uePt0uM6f3BXlNsE5DSVJCzC+1HjQ4bZWe5PHk13dRtXINr4clRrMd2koYARNZL7EwOb/YpH1xn4t31UKw==
   dependencies:
     "@shopify/app-bridge" "^1.11.1"
     stimulus "^1.1.1"
@@ -7015,6 +7015,11 @@ tunnel-agent@^0.6.0:
   integrity sha1-J6XeoGs2sEoKmWZ3SykIaPD8QP0=
   dependencies:
     safe-buffer "^5.0.1"
+
+turbolinks@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/turbolinks/-/turbolinks-5.2.0.tgz#e6877a55ea5c1cb3bb225f0a4ae303d6d32ff77c"
+  integrity sha512-pMiez3tyBo6uRHFNNZoYMmrES/IaGgMhQQM+VFF36keryjb5ms0XkVpmKHkfW/4Vy96qiGW3K9bz0tF5sK9bBw==
 
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"

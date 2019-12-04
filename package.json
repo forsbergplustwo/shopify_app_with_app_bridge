@@ -8,7 +8,8 @@
     "@rails/webpacker": "^4.2.0",
     "@shopify/app-bridge": "^1.11.1",
     "stimulus": "^1.1.1",
-    "stimulus-shopify-app-bridge": "^0.1.0"
+    "stimulus-shopify-app-bridge": "^0.1.2",
+    "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
   "devDependencies": {
